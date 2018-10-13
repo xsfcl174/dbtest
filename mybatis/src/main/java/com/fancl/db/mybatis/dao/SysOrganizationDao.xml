@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fancl.db.mybatis.dao.SysOrganizationDao">
+  <resultMap id="BaseResultMap" type="com.fancl.db.mybatis.bean.SysOrganization">
+    <id column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+    <result column="ORG_CITY" jdbcType="CHAR" property="orgCity" />
+    <result column="ORG_LEVEL" jdbcType="CHAR" property="orgLevel" />
+    <result column="ORG_LAYER" jdbcType="VARCHAR" property="orgLayer" />
+    <result column="ORG_PARENT_ID" jdbcType="VARCHAR" property="orgParentId" />
+    <result column="ORG_IS_LEAF" jdbcType="SMALLINT" property="orgIsLeaf" />
+    <result column="ORG_MANAGER" jdbcType="VARCHAR" property="orgManager" />
+    <result column="ORG_MANAGER_PHONE" jdbcType="VARCHAR" property="orgManagerPhone" />
+    <result column="ORG_ADDRESS" jdbcType="VARCHAR" property="orgAddress" />
+    <result column="ORG_BILL_ADDRESS" jdbcType="VARCHAR" property="orgBillAddress" />
+    <result column="ORG_POST_CODE" jdbcType="VARCHAR" property="orgPostCode" />
+    <result column="ORG_TELEPHONE" jdbcType="VARCHAR" property="orgTelephone" />
+    <result column="ORG_UNITE" jdbcType="VARCHAR" property="orgUnite" />
+    <result column="ORG_ACTIVE" jdbcType="SMALLINT" property="orgActive" />
+    <result column="ORG_NOTE" jdbcType="VARCHAR" property="orgNote" />
+    <result column="ORG_CREATE_ID" jdbcType="VARCHAR" property="orgCreateId" />
+    <result column="ORG_CREATE_DATE" jdbcType="TIMESTAMP" property="orgCreateDate" />
+    <result column="ORG_UPDATE_ID" jdbcType="VARCHAR" property="orgUpdateId" />
+    <result column="ORG_UPDATE_DATE" jdbcType="TIMESTAMP" property="orgUpdateDate" />
+    <result column="ORG_UNUSED1" jdbcType="VARCHAR" property="orgUnused1" />
+    <result column="ORG_UNUSED2" jdbcType="VARCHAR" property="orgUnused2" />
+    <result column="ORG_UNUSED3" jdbcType="INTEGER" property="orgUnused3" />
+    <result column="ORG_UNUSED4" jdbcType="INTEGER" property="orgUnused4" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <if test="fields == null">
+      ORG_ID, ORG_NAME, ORG_CODE, ORG_CITY, ORG_LEVEL, ORG_LAYER, ORG_PARENT_ID, ORG_IS_LEAF, 
+      ORG_MANAGER, ORG_MANAGER_PHONE, ORG_ADDRESS, ORG_BILL_ADDRESS, ORG_POST_CODE, ORG_TELEPHONE, 
+      ORG_UNITE, ORG_ACTIVE, ORG_NOTE, ORG_CREATE_ID, ORG_CREATE_DATE, ORG_UPDATE_ID, ORG_UPDATE_DATE, 
+      ORG_UNUSED1, ORG_UNUSED2, ORG_UNUSED3, ORG_UNUSED4
+    </if>
+    <if test="fields != null">
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByCriteria" parameterType="com.fancl.db.mybatis.bean.SysOrganizationCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null">
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    ORG_ID,ORG_NAME,ORG_CODE,ORG_CITY,ORG_LEVEL,ORG_LAYER,ORG_PARENT_ID,ORG_IS_LEAF,ORG_MANAGER,ORG_MANAGER_PHONE,ORG_ADDRESS,ORG_BILL_ADDRESS,ORG_POST_CODE,ORG_TELEPHONE,ORG_UNITE,ORG_ACTIVE,ORG_NOTE,ORG_CREATE_ID,ORG_CREATE_DATE,ORG_UPDATE_ID,ORG_UPDATE_DATE,ORG_UNUSED1,ORG_UNUSED2,ORG_UNUSED3,ORG_UNUSED4
+    from sys_organization
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_organization
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.fancl.db.mybatis.bean.SysOrganizationCriteria">
+    delete from sys_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fancl.db.mybatis.bean.SysOrganization">
+    insert into sys_organization (ORG_ID, ORG_NAME, ORG_CODE, 
+      ORG_CITY, ORG_LEVEL, ORG_LAYER, 
+      ORG_PARENT_ID, ORG_IS_LEAF, ORG_MANAGER, 
+      ORG_MANAGER_PHONE, ORG_ADDRESS, ORG_BILL_ADDRESS, 
+      ORG_POST_CODE, ORG_TELEPHONE, ORG_UNITE, 
+      ORG_ACTIVE, ORG_NOTE, ORG_CREATE_ID, 
+      ORG_CREATE_DATE, ORG_UPDATE_ID, ORG_UPDATE_DATE, 
+      ORG_UNUSED1, ORG_UNUSED2, ORG_UNUSED3, 
+      ORG_UNUSED4)
+    values (#{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, 
+      #{orgCity,jdbcType=CHAR}, #{orgLevel,jdbcType=CHAR}, #{orgLayer,jdbcType=VARCHAR}, 
+      #{orgParentId,jdbcType=VARCHAR}, #{orgIsLeaf,jdbcType=SMALLINT}, #{orgManager,jdbcType=VARCHAR}, 
+      #{orgManagerPhone,jdbcType=VARCHAR}, #{orgAddress,jdbcType=VARCHAR}, #{orgBillAddress,jdbcType=VARCHAR}, 
+      #{orgPostCode,jdbcType=VARCHAR}, #{orgTelephone,jdbcType=VARCHAR}, #{orgUnite,jdbcType=VARCHAR}, 
+      #{orgActive,jdbcType=SMALLINT}, #{orgNote,jdbcType=VARCHAR}, #{orgCreateId,jdbcType=VARCHAR}, 
+      #{orgCreateDate,jdbcType=TIMESTAMP}, #{orgUpdateId,jdbcType=VARCHAR}, #{orgUpdateDate,jdbcType=TIMESTAMP}, 
+      #{orgUnused1,jdbcType=VARCHAR}, #{orgUnused2,jdbcType=VARCHAR}, #{orgUnused3,jdbcType=INTEGER}, 
+      #{orgUnused4,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fancl.db.mybatis.bean.SysOrganization">
+    insert into sys_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        ORG_ID,
+      </if>
+      <if test="orgName != null">
+        ORG_NAME,
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE,
+      </if>
+      <if test="orgCity != null">
+        ORG_CITY,
+      </if>
+      <if test="orgLevel != null">
+        ORG_LEVEL,
+      </if>
+      <if test="orgLayer != null">
+        ORG_LAYER,
+      </if>
+      <if test="orgParentId != null">
+        ORG_PARENT_ID,
+      </if>
+      <if test="orgIsLeaf != null">
+        ORG_IS_LEAF,
+      </if>
+      <if test="orgManager != null">
+        ORG_MANAGER,
+      </if>
+      <if test="orgManagerPhone != null">
+        ORG_MANAGER_PHONE,
+      </if>
+      <if test="orgAddress != null">
+        ORG_ADDRESS,
+      </if>
+      <if test="orgBillAddress != null">
+        ORG_BILL_ADDRESS,
+      </if>
+      <if test="orgPostCode != null">
+        ORG_POST_CODE,
+      </if>
+      <if test="orgTelephone != null">
+        ORG_TELEPHONE,
+      </if>
+      <if test="orgUnite != null">
+        ORG_UNITE,
+      </if>
+      <if test="orgActive != null">
+        ORG_ACTIVE,
+      </if>
+      <if test="orgNote != null">
+        ORG_NOTE,
+      </if>
+      <if test="orgCreateId != null">
+        ORG_CREATE_ID,
+      </if>
+      <if test="orgCreateDate != null">
+        ORG_CREATE_DATE,
+      </if>
+      <if test="orgUpdateId != null">
+        ORG_UPDATE_ID,
+      </if>
+      <if test="orgUpdateDate != null">
+        ORG_UPDATE_DATE,
+      </if>
+      <if test="orgUnused1 != null">
+        ORG_UNUSED1,
+      </if>
+      <if test="orgUnused2 != null">
+        ORG_UNUSED2,
+      </if>
+      <if test="orgUnused3 != null">
+        ORG_UNUSED3,
+      </if>
+      <if test="orgUnused4 != null">
+        ORG_UNUSED4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCity != null">
+        #{orgCity,jdbcType=CHAR},
+      </if>
+      <if test="orgLevel != null">
+        #{orgLevel,jdbcType=CHAR},
+      </if>
+      <if test="orgLayer != null">
+        #{orgLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="orgParentId != null">
+        #{orgParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIsLeaf != null">
+        #{orgIsLeaf,jdbcType=SMALLINT},
+      </if>
+      <if test="orgManager != null">
+        #{orgManager,jdbcType=VARCHAR},
+      </if>
+      <if test="orgManagerPhone != null">
+        #{orgManagerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddress != null">
+        #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBillAddress != null">
+        #{orgBillAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPostCode != null">
+        #{orgPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTelephone != null">
+        #{orgTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUnite != null">
+        #{orgUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="orgActive != null">
+        #{orgActive,jdbcType=SMALLINT},
+      </if>
+      <if test="orgNote != null">
+        #{orgNote,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCreateId != null">
+        #{orgCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCreateDate != null">
+        #{orgCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgUpdateId != null">
+        #{orgUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUpdateDate != null">
+        #{orgUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgUnused1 != null">
+        #{orgUnused1,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUnused2 != null">
+        #{orgUnused2,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUnused3 != null">
+        #{orgUnused3,jdbcType=INTEGER},
+      </if>
+      <if test="orgUnused4 != null">
+        #{orgUnused4,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.fancl.db.mybatis.bean.SysOrganizationCriteria" resultType="java.lang.Long">
+    select count(*) from sys_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update sys_organization
+    <set>
+      <if test="record.orgId != null">
+        ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null">
+        ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCode != null">
+        ORG_CODE = #{record.orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCity != null">
+        ORG_CITY = #{record.orgCity,jdbcType=CHAR},
+      </if>
+      <if test="record.orgLevel != null">
+        ORG_LEVEL = #{record.orgLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.orgLayer != null">
+        ORG_LAYER = #{record.orgLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgParentId != null">
+        ORG_PARENT_ID = #{record.orgParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgIsLeaf != null">
+        ORG_IS_LEAF = #{record.orgIsLeaf,jdbcType=SMALLINT},
+      </if>
+      <if test="record.orgManager != null">
+        ORG_MANAGER = #{record.orgManager,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgManagerPhone != null">
+        ORG_MANAGER_PHONE = #{record.orgManagerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgAddress != null">
+        ORG_ADDRESS = #{record.orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgBillAddress != null">
+        ORG_BILL_ADDRESS = #{record.orgBillAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgPostCode != null">
+        ORG_POST_CODE = #{record.orgPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgTelephone != null">
+        ORG_TELEPHONE = #{record.orgTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgUnite != null">
+        ORG_UNITE = #{record.orgUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgActive != null">
+        ORG_ACTIVE = #{record.orgActive,jdbcType=SMALLINT},
+      </if>
+      <if test="record.orgNote != null">
+        ORG_NOTE = #{record.orgNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCreateId != null">
+        ORG_CREATE_ID = #{record.orgCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCreateDate != null">
+        ORG_CREATE_DATE = #{record.orgCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgUpdateId != null">
+        ORG_UPDATE_ID = #{record.orgUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgUpdateDate != null">
+        ORG_UPDATE_DATE = #{record.orgUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgUnused1 != null">
+        ORG_UNUSED1 = #{record.orgUnused1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgUnused2 != null">
+        ORG_UNUSED2 = #{record.orgUnused2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgUnused3 != null">
+        ORG_UNUSED3 = #{record.orgUnused3,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgUnused4 != null">
+        ORG_UNUSED4 = #{record.orgUnused4,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update sys_organization
+    set ORG_ID = #{record.orgId,jdbcType=VARCHAR},
+      ORG_NAME = #{record.orgName,jdbcType=VARCHAR},
+      ORG_CODE = #{record.orgCode,jdbcType=VARCHAR},
+      ORG_CITY = #{record.orgCity,jdbcType=CHAR},
+      ORG_LEVEL = #{record.orgLevel,jdbcType=CHAR},
+      ORG_LAYER = #{record.orgLayer,jdbcType=VARCHAR},
+      ORG_PARENT_ID = #{record.orgParentId,jdbcType=VARCHAR},
+      ORG_IS_LEAF = #{record.orgIsLeaf,jdbcType=SMALLINT},
+      ORG_MANAGER = #{record.orgManager,jdbcType=VARCHAR},
+      ORG_MANAGER_PHONE = #{record.orgManagerPhone,jdbcType=VARCHAR},
+      ORG_ADDRESS = #{record.orgAddress,jdbcType=VARCHAR},
+      ORG_BILL_ADDRESS = #{record.orgBillAddress,jdbcType=VARCHAR},
+      ORG_POST_CODE = #{record.orgPostCode,jdbcType=VARCHAR},
+      ORG_TELEPHONE = #{record.orgTelephone,jdbcType=VARCHAR},
+      ORG_UNITE = #{record.orgUnite,jdbcType=VARCHAR},
+      ORG_ACTIVE = #{record.orgActive,jdbcType=SMALLINT},
+      ORG_NOTE = #{record.orgNote,jdbcType=VARCHAR},
+      ORG_CREATE_ID = #{record.orgCreateId,jdbcType=VARCHAR},
+      ORG_CREATE_DATE = #{record.orgCreateDate,jdbcType=TIMESTAMP},
+      ORG_UPDATE_ID = #{record.orgUpdateId,jdbcType=VARCHAR},
+      ORG_UPDATE_DATE = #{record.orgUpdateDate,jdbcType=TIMESTAMP},
+      ORG_UNUSED1 = #{record.orgUnused1,jdbcType=VARCHAR},
+      ORG_UNUSED2 = #{record.orgUnused2,jdbcType=VARCHAR},
+      ORG_UNUSED3 = #{record.orgUnused3,jdbcType=INTEGER},
+      ORG_UNUSED4 = #{record.orgUnused4,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fancl.db.mybatis.bean.SysOrganization">
+    update sys_organization
+    <set>
+      <if test="orgName != null">
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCity != null">
+        ORG_CITY = #{orgCity,jdbcType=CHAR},
+      </if>
+      <if test="orgLevel != null">
+        ORG_LEVEL = #{orgLevel,jdbcType=CHAR},
+      </if>
+      <if test="orgLayer != null">
+        ORG_LAYER = #{orgLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="orgParentId != null">
+        ORG_PARENT_ID = #{orgParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIsLeaf != null">
+        ORG_IS_LEAF = #{orgIsLeaf,jdbcType=SMALLINT},
+      </if>
+      <if test="orgManager != null">
+        ORG_MANAGER = #{orgManager,jdbcType=VARCHAR},
+      </if>
+      <if test="orgManagerPhone != null">
+        ORG_MANAGER_PHONE = #{orgManagerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddress != null">
+        ORG_ADDRESS = #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBillAddress != null">
+        ORG_BILL_ADDRESS = #{orgBillAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPostCode != null">
+        ORG_POST_CODE = #{orgPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTelephone != null">
+        ORG_TELEPHONE = #{orgTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUnite != null">
+        ORG_UNITE = #{orgUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="orgActive != null">
+        ORG_ACTIVE = #{orgActive,jdbcType=SMALLINT},
+      </if>
+      <if test="orgNote != null">
+        ORG_NOTE = #{orgNote,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCreateId != null">
+        ORG_CREATE_ID = #{orgCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCreateDate != null">
+        ORG_CREATE_DATE = #{orgCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgUpdateId != null">
+        ORG_UPDATE_ID = #{orgUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUpdateDate != null">
+        ORG_UPDATE_DATE = #{orgUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgUnused1 != null">
+        ORG_UNUSED1 = #{orgUnused1,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUnused2 != null">
+        ORG_UNUSED2 = #{orgUnused2,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUnused3 != null">
+        ORG_UNUSED3 = #{orgUnused3,jdbcType=INTEGER},
+      </if>
+      <if test="orgUnused4 != null">
+        ORG_UNUSED4 = #{orgUnused4,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fancl.db.mybatis.bean.SysOrganization">
+    update sys_organization
+    set ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_CITY = #{orgCity,jdbcType=CHAR},
+      ORG_LEVEL = #{orgLevel,jdbcType=CHAR},
+      ORG_LAYER = #{orgLayer,jdbcType=VARCHAR},
+      ORG_PARENT_ID = #{orgParentId,jdbcType=VARCHAR},
+      ORG_IS_LEAF = #{orgIsLeaf,jdbcType=SMALLINT},
+      ORG_MANAGER = #{orgManager,jdbcType=VARCHAR},
+      ORG_MANAGER_PHONE = #{orgManagerPhone,jdbcType=VARCHAR},
+      ORG_ADDRESS = #{orgAddress,jdbcType=VARCHAR},
+      ORG_BILL_ADDRESS = #{orgBillAddress,jdbcType=VARCHAR},
+      ORG_POST_CODE = #{orgPostCode,jdbcType=VARCHAR},
+      ORG_TELEPHONE = #{orgTelephone,jdbcType=VARCHAR},
+      ORG_UNITE = #{orgUnite,jdbcType=VARCHAR},
+      ORG_ACTIVE = #{orgActive,jdbcType=SMALLINT},
+      ORG_NOTE = #{orgNote,jdbcType=VARCHAR},
+      ORG_CREATE_ID = #{orgCreateId,jdbcType=VARCHAR},
+      ORG_CREATE_DATE = #{orgCreateDate,jdbcType=TIMESTAMP},
+      ORG_UPDATE_ID = #{orgUpdateId,jdbcType=VARCHAR},
+      ORG_UPDATE_DATE = #{orgUpdateDate,jdbcType=TIMESTAMP},
+      ORG_UNUSED1 = #{orgUnused1,jdbcType=VARCHAR},
+      ORG_UNUSED2 = #{orgUnused2,jdbcType=VARCHAR},
+      ORG_UNUSED3 = #{orgUnused3,jdbcType=INTEGER},
+      ORG_UNUSED4 = #{orgUnused4,jdbcType=INTEGER}
+    where ORG_ID = #{orgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fancl.db.mybatis.dao.UrUsersDao">
+  <resultMap id="BaseResultMap" type="com.fancl.db.mybatis.bean.UrUsers">
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_ORG_ID" jdbcType="VARCHAR" property="userOrgId" />
+    <result column="USER_LOGIN_NAME" jdbcType="VARCHAR" property="userLoginName" />
+    <result column="USER_LOGIN_PASSWD" jdbcType="VARCHAR" property="userLoginPasswd" />
+    <result column="USER_LOGIN_DATE" jdbcType="TIMESTAMP" property="userLoginDate" />
+    <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone" />
+    <result column="USER_MOBILE" jdbcType="VARCHAR" property="userMobile" />
+    <result column="USER_EMAIL" jdbcType="VARCHAR" property="userEmail" />
+    <result column="USER_WORK_NO" jdbcType="VARCHAR" property="userWorkNo" />
+    <result column="USER_SEX" jdbcType="VARCHAR" property="userSex" />
+    <result column="USER_BIRTHDAY" jdbcType="TIMESTAMP" property="userBirthday" />
+    <result column="USER_WORKED" jdbcType="VARCHAR" property="userWorked" />
+    <result column="USER_EDUCATION" jdbcType="CHAR" property="userEducation" />
+    <result column="USER_ORIGIN" jdbcType="VARCHAR" property="userOrigin" />
+    <result column="USER_TITLE" jdbcType="VARCHAR" property="userTitle" />
+    <result column="USER_WORK_LIMIT" jdbcType="VARCHAR" property="userWorkLimit" />
+    <result column="USER_IDENT_NO" jdbcType="VARCHAR" property="userIdentNo" />
+    <result column="USER_IN_DATE" jdbcType="TIMESTAMP" property="userInDate" />
+    <result column="USER_AREA" jdbcType="CHAR" property="userArea" />
+    <result column="USER_ADDRESS" jdbcType="VARCHAR" property="userAddress" />
+    <result column="USER_POSTAL" jdbcType="VARCHAR" property="userPostal" />
+    <result column="USER_ACTIVE" jdbcType="SMALLINT" property="userActive" />
+    <result column="USER_OUT" jdbcType="SMALLINT" property="userOut" />
+    <result column="USER_OUT_DATE" jdbcType="TIMESTAMP" property="userOutDate" />
+    <result column="USER_NOTE" jdbcType="VARCHAR" property="userNote" />
+    <result column="USER_CREATE_ID" jdbcType="VARCHAR" property="userCreateId" />
+    <result column="USER_CREATE_DATE" jdbcType="TIMESTAMP" property="userCreateDate" />
+    <result column="USER_UPDATE_ID" jdbcType="VARCHAR" property="userUpdateId" />
+    <result column="USER_UPDATE_DATE" jdbcType="TIMESTAMP" property="userUpdateDate" />
+    <result column="USER_PASSWD_CHANGE_DATE" jdbcType="TIMESTAMP" property="userPasswdChangeDate" />
+    <result column="USER_UNLOCK_DATE" jdbcType="TIMESTAMP" property="userUnlockDate" />
+    <result column="USER_ADMIN" jdbcType="SMALLINT" property="userAdmin" />
+    <result column="USER_UNUSED1" jdbcType="VARCHAR" property="userUnused1" />
+    <result column="USER_UNUSED2" jdbcType="VARCHAR" property="userUnused2" />
+    <result column="USER_UNUSED3" jdbcType="INTEGER" property="userUnused3" />
+    <result column="USER_UNUSED4" jdbcType="INTEGER" property="userUnused4" />
+    <result column="USER_BEFORE_NINE" jdbcType="SMALLINT" property="userBeforeNine" />
+    <result column="USER_GATHER" jdbcType="INTEGER" property="userGather" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <if test="fields == null">
+      USER_ID, USER_NAME, USER_ORG_ID, USER_LOGIN_NAME, USER_LOGIN_PASSWD, USER_LOGIN_DATE, 
+      USER_PHONE, USER_MOBILE, USER_EMAIL, USER_WORK_NO, USER_SEX, USER_BIRTHDAY, USER_WORKED, 
+      USER_EDUCATION, USER_ORIGIN, USER_TITLE, USER_WORK_LIMIT, USER_IDENT_NO, USER_IN_DATE, 
+      USER_AREA, USER_ADDRESS, USER_POSTAL, USER_ACTIVE, USER_OUT, USER_OUT_DATE, USER_NOTE, 
+      USER_CREATE_ID, USER_CREATE_DATE, USER_UPDATE_ID, USER_UPDATE_DATE, USER_PASSWD_CHANGE_DATE, 
+      USER_UNLOCK_DATE, USER_ADMIN, USER_UNUSED1, USER_UNUSED2, USER_UNUSED3, USER_UNUSED4, 
+      USER_BEFORE_NINE, USER_GATHER
+    </if>
+    <if test="fields != null">
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByCriteria" parameterType="com.fancl.db.mybatis.bean.UrUsersCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ur_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null">
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    USER_ID,USER_NAME,USER_ORG_ID,USER_LOGIN_NAME,USER_LOGIN_PASSWD,USER_LOGIN_DATE,USER_PHONE,USER_MOBILE,USER_EMAIL,USER_WORK_NO,USER_SEX,USER_BIRTHDAY,USER_WORKED,USER_EDUCATION,USER_ORIGIN,USER_TITLE,USER_WORK_LIMIT,USER_IDENT_NO,USER_IN_DATE,USER_AREA,USER_ADDRESS,USER_POSTAL,USER_ACTIVE,USER_OUT,USER_OUT_DATE,USER_NOTE,USER_CREATE_ID,USER_CREATE_DATE,USER_UPDATE_ID,USER_UPDATE_DATE,USER_PASSWD_CHANGE_DATE,USER_UNLOCK_DATE,USER_ADMIN,USER_UNUSED1,USER_UNUSED2,USER_UNUSED3,USER_UNUSED4,USER_BEFORE_NINE,USER_GATHER
+    from ur_users
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ur_users
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.fancl.db.mybatis.bean.UrUsersCriteria">
+    delete from ur_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fancl.db.mybatis.bean.UrUsers">
+    insert into ur_users (USER_ID, USER_NAME, USER_ORG_ID, 
+      USER_LOGIN_NAME, USER_LOGIN_PASSWD, USER_LOGIN_DATE, 
+      USER_PHONE, USER_MOBILE, USER_EMAIL, 
+      USER_WORK_NO, USER_SEX, USER_BIRTHDAY, 
+      USER_WORKED, USER_EDUCATION, USER_ORIGIN, 
+      USER_TITLE, USER_WORK_LIMIT, USER_IDENT_NO, 
+      USER_IN_DATE, USER_AREA, USER_ADDRESS, 
+      USER_POSTAL, USER_ACTIVE, USER_OUT, 
+      USER_OUT_DATE, USER_NOTE, USER_CREATE_ID, 
+      USER_CREATE_DATE, USER_UPDATE_ID, USER_UPDATE_DATE, 
+      USER_PASSWD_CHANGE_DATE, USER_UNLOCK_DATE, 
+      USER_ADMIN, USER_UNUSED1, USER_UNUSED2, 
+      USER_UNUSED3, USER_UNUSED4, USER_BEFORE_NINE, 
+      USER_GATHER)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userOrgId,jdbcType=VARCHAR}, 
+      #{userLoginName,jdbcType=VARCHAR}, #{userLoginPasswd,jdbcType=VARCHAR}, #{userLoginDate,jdbcType=TIMESTAMP}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userMobile,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userWorkNo,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, #{userBirthday,jdbcType=TIMESTAMP}, 
+      #{userWorked,jdbcType=VARCHAR}, #{userEducation,jdbcType=CHAR}, #{userOrigin,jdbcType=VARCHAR}, 
+      #{userTitle,jdbcType=VARCHAR}, #{userWorkLimit,jdbcType=VARCHAR}, #{userIdentNo,jdbcType=VARCHAR}, 
+      #{userInDate,jdbcType=TIMESTAMP}, #{userArea,jdbcType=CHAR}, #{userAddress,jdbcType=VARCHAR}, 
+      #{userPostal,jdbcType=VARCHAR}, #{userActive,jdbcType=SMALLINT}, #{userOut,jdbcType=SMALLINT}, 
+      #{userOutDate,jdbcType=TIMESTAMP}, #{userNote,jdbcType=VARCHAR}, #{userCreateId,jdbcType=VARCHAR}, 
+      #{userCreateDate,jdbcType=TIMESTAMP}, #{userUpdateId,jdbcType=VARCHAR}, #{userUpdateDate,jdbcType=TIMESTAMP}, 
+      #{userPasswdChangeDate,jdbcType=TIMESTAMP}, #{userUnlockDate,jdbcType=TIMESTAMP}, 
+      #{userAdmin,jdbcType=SMALLINT}, #{userUnused1,jdbcType=VARCHAR}, #{userUnused2,jdbcType=VARCHAR}, 
+      #{userUnused3,jdbcType=INTEGER}, #{userUnused4,jdbcType=INTEGER}, #{userBeforeNine,jdbcType=SMALLINT}, 
+      #{userGather,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fancl.db.mybatis.bean.UrUsers">
+    insert into ur_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userOrgId != null">
+        USER_ORG_ID,
+      </if>
+      <if test="userLoginName != null">
+        USER_LOGIN_NAME,
+      </if>
+      <if test="userLoginPasswd != null">
+        USER_LOGIN_PASSWD,
+      </if>
+      <if test="userLoginDate != null">
+        USER_LOGIN_DATE,
+      </if>
+      <if test="userPhone != null">
+        USER_PHONE,
+      </if>
+      <if test="userMobile != null">
+        USER_MOBILE,
+      </if>
+      <if test="userEmail != null">
+        USER_EMAIL,
+      </if>
+      <if test="userWorkNo != null">
+        USER_WORK_NO,
+      </if>
+      <if test="userSex != null">
+        USER_SEX,
+      </if>
+      <if test="userBirthday != null">
+        USER_BIRTHDAY,
+      </if>
+      <if test="userWorked != null">
+        USER_WORKED,
+      </if>
+      <if test="userEducation != null">
+        USER_EDUCATION,
+      </if>
+      <if test="userOrigin != null">
+        USER_ORIGIN,
+      </if>
+      <if test="userTitle != null">
+        USER_TITLE,
+      </if>
+      <if test="userWorkLimit != null">
+        USER_WORK_LIMIT,
+      </if>
+      <if test="userIdentNo != null">
+        USER_IDENT_NO,
+      </if>
+      <if test="userInDate != null">
+        USER_IN_DATE,
+      </if>
+      <if test="userArea != null">
+        USER_AREA,
+      </if>
+      <if test="userAddress != null">
+        USER_ADDRESS,
+      </if>
+      <if test="userPostal != null">
+        USER_POSTAL,
+      </if>
+      <if test="userActive != null">
+        USER_ACTIVE,
+      </if>
+      <if test="userOut != null">
+        USER_OUT,
+      </if>
+      <if test="userOutDate != null">
+        USER_OUT_DATE,
+      </if>
+      <if test="userNote != null">
+        USER_NOTE,
+      </if>
+      <if test="userCreateId != null">
+        USER_CREATE_ID,
+      </if>
+      <if test="userCreateDate != null">
+        USER_CREATE_DATE,
+      </if>
+      <if test="userUpdateId != null">
+        USER_UPDATE_ID,
+      </if>
+      <if test="userUpdateDate != null">
+        USER_UPDATE_DATE,
+      </if>
+      <if test="userPasswdChangeDate != null">
+        USER_PASSWD_CHANGE_DATE,
+      </if>
+      <if test="userUnlockDate != null">
+        USER_UNLOCK_DATE,
+      </if>
+      <if test="userAdmin != null">
+        USER_ADMIN,
+      </if>
+      <if test="userUnused1 != null">
+        USER_UNUSED1,
+      </if>
+      <if test="userUnused2 != null">
+        USER_UNUSED2,
+      </if>
+      <if test="userUnused3 != null">
+        USER_UNUSED3,
+      </if>
+      <if test="userUnused4 != null">
+        USER_UNUSED4,
+      </if>
+      <if test="userBeforeNine != null">
+        USER_BEFORE_NINE,
+      </if>
+      <if test="userGather != null">
+        USER_GATHER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrgId != null">
+        #{userOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginName != null">
+        #{userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginPasswd != null">
+        #{userLoginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginDate != null">
+        #{userLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userWorkNo != null">
+        #{userWorkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null">
+        #{userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userWorked != null">
+        #{userWorked,jdbcType=VARCHAR},
+      </if>
+      <if test="userEducation != null">
+        #{userEducation,jdbcType=CHAR},
+      </if>
+      <if test="userOrigin != null">
+        #{userOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="userTitle != null">
+        #{userTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userWorkLimit != null">
+        #{userWorkLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentNo != null">
+        #{userIdentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userInDate != null">
+        #{userInDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userArea != null">
+        #{userArea,jdbcType=CHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPostal != null">
+        #{userPostal,jdbcType=VARCHAR},
+      </if>
+      <if test="userActive != null">
+        #{userActive,jdbcType=SMALLINT},
+      </if>
+      <if test="userOut != null">
+        #{userOut,jdbcType=SMALLINT},
+      </if>
+      <if test="userOutDate != null">
+        #{userOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNote != null">
+        #{userNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreateId != null">
+        #{userCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreateDate != null">
+        #{userCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdateId != null">
+        #{userUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="userUpdateDate != null">
+        #{userUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPasswdChangeDate != null">
+        #{userPasswdChangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUnlockDate != null">
+        #{userUnlockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAdmin != null">
+        #{userAdmin,jdbcType=SMALLINT},
+      </if>
+      <if test="userUnused1 != null">
+        #{userUnused1,jdbcType=VARCHAR},
+      </if>
+      <if test="userUnused2 != null">
+        #{userUnused2,jdbcType=VARCHAR},
+      </if>
+      <if test="userUnused3 != null">
+        #{userUnused3,jdbcType=INTEGER},
+      </if>
+      <if test="userUnused4 != null">
+        #{userUnused4,jdbcType=INTEGER},
+      </if>
+      <if test="userBeforeNine != null">
+        #{userBeforeNine,jdbcType=SMALLINT},
+      </if>
+      <if test="userGather != null">
+        #{userGather,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.fancl.db.mybatis.bean.UrUsersCriteria" resultType="java.lang.Long">
+    select count(*) from ur_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update ur_users
+    <set>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userOrgId != null">
+        USER_ORG_ID = #{record.userOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLoginName != null">
+        USER_LOGIN_NAME = #{record.userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLoginPasswd != null">
+        USER_LOGIN_PASSWD = #{record.userLoginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLoginDate != null">
+        USER_LOGIN_DATE = #{record.userLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userPhone != null">
+        USER_PHONE = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMobile != null">
+        USER_MOBILE = #{record.userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null">
+        USER_EMAIL = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userWorkNo != null">
+        USER_WORK_NO = #{record.userWorkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        USER_SEX = #{record.userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userBirthday != null">
+        USER_BIRTHDAY = #{record.userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userWorked != null">
+        USER_WORKED = #{record.userWorked,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEducation != null">
+        USER_EDUCATION = #{record.userEducation,jdbcType=CHAR},
+      </if>
+      <if test="record.userOrigin != null">
+        USER_ORIGIN = #{record.userOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userTitle != null">
+        USER_TITLE = #{record.userTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userWorkLimit != null">
+        USER_WORK_LIMIT = #{record.userWorkLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIdentNo != null">
+        USER_IDENT_NO = #{record.userIdentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userInDate != null">
+        USER_IN_DATE = #{record.userInDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userArea != null">
+        USER_AREA = #{record.userArea,jdbcType=CHAR},
+      </if>
+      <if test="record.userAddress != null">
+        USER_ADDRESS = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPostal != null">
+        USER_POSTAL = #{record.userPostal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userActive != null">
+        USER_ACTIVE = #{record.userActive,jdbcType=SMALLINT},
+      </if>
+      <if test="record.userOut != null">
+        USER_OUT = #{record.userOut,jdbcType=SMALLINT},
+      </if>
+      <if test="record.userOutDate != null">
+        USER_OUT_DATE = #{record.userOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userNote != null">
+        USER_NOTE = #{record.userNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCreateId != null">
+        USER_CREATE_ID = #{record.userCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userCreateDate != null">
+        USER_CREATE_DATE = #{record.userCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userUpdateId != null">
+        USER_UPDATE_ID = #{record.userUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userUpdateDate != null">
+        USER_UPDATE_DATE = #{record.userUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userPasswdChangeDate != null">
+        USER_PASSWD_CHANGE_DATE = #{record.userPasswdChangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userUnlockDate != null">
+        USER_UNLOCK_DATE = #{record.userUnlockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userAdmin != null">
+        USER_ADMIN = #{record.userAdmin,jdbcType=SMALLINT},
+      </if>
+      <if test="record.userUnused1 != null">
+        USER_UNUSED1 = #{record.userUnused1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userUnused2 != null">
+        USER_UNUSED2 = #{record.userUnused2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userUnused3 != null">
+        USER_UNUSED3 = #{record.userUnused3,jdbcType=INTEGER},
+      </if>
+      <if test="record.userUnused4 != null">
+        USER_UNUSED4 = #{record.userUnused4,jdbcType=INTEGER},
+      </if>
+      <if test="record.userBeforeNine != null">
+        USER_BEFORE_NINE = #{record.userBeforeNine,jdbcType=SMALLINT},
+      </if>
+      <if test="record.userGather != null">
+        USER_GATHER = #{record.userGather,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update ur_users
+    set USER_ID = #{record.userId,jdbcType=INTEGER},
+      USER_NAME = #{record.userName,jdbcType=VARCHAR},
+      USER_ORG_ID = #{record.userOrgId,jdbcType=VARCHAR},
+      USER_LOGIN_NAME = #{record.userLoginName,jdbcType=VARCHAR},
+      USER_LOGIN_PASSWD = #{record.userLoginPasswd,jdbcType=VARCHAR},
+      USER_LOGIN_DATE = #{record.userLoginDate,jdbcType=TIMESTAMP},
+      USER_PHONE = #{record.userPhone,jdbcType=VARCHAR},
+      USER_MOBILE = #{record.userMobile,jdbcType=VARCHAR},
+      USER_EMAIL = #{record.userEmail,jdbcType=VARCHAR},
+      USER_WORK_NO = #{record.userWorkNo,jdbcType=VARCHAR},
+      USER_SEX = #{record.userSex,jdbcType=VARCHAR},
+      USER_BIRTHDAY = #{record.userBirthday,jdbcType=TIMESTAMP},
+      USER_WORKED = #{record.userWorked,jdbcType=VARCHAR},
+      USER_EDUCATION = #{record.userEducation,jdbcType=CHAR},
+      USER_ORIGIN = #{record.userOrigin,jdbcType=VARCHAR},
+      USER_TITLE = #{record.userTitle,jdbcType=VARCHAR},
+      USER_WORK_LIMIT = #{record.userWorkLimit,jdbcType=VARCHAR},
+      USER_IDENT_NO = #{record.userIdentNo,jdbcType=VARCHAR},
+      USER_IN_DATE = #{record.userInDate,jdbcType=TIMESTAMP},
+      USER_AREA = #{record.userArea,jdbcType=CHAR},
+      USER_ADDRESS = #{record.userAddress,jdbcType=VARCHAR},
+      USER_POSTAL = #{record.userPostal,jdbcType=VARCHAR},
+      USER_ACTIVE = #{record.userActive,jdbcType=SMALLINT},
+      USER_OUT = #{record.userOut,jdbcType=SMALLINT},
+      USER_OUT_DATE = #{record.userOutDate,jdbcType=TIMESTAMP},
+      USER_NOTE = #{record.userNote,jdbcType=VARCHAR},
+      USER_CREATE_ID = #{record.userCreateId,jdbcType=VARCHAR},
+      USER_CREATE_DATE = #{record.userCreateDate,jdbcType=TIMESTAMP},
+      USER_UPDATE_ID = #{record.userUpdateId,jdbcType=VARCHAR},
+      USER_UPDATE_DATE = #{record.userUpdateDate,jdbcType=TIMESTAMP},
+      USER_PASSWD_CHANGE_DATE = #{record.userPasswdChangeDate,jdbcType=TIMESTAMP},
+      USER_UNLOCK_DATE = #{record.userUnlockDate,jdbcType=TIMESTAMP},
+      USER_ADMIN = #{record.userAdmin,jdbcType=SMALLINT},
+      USER_UNUSED1 = #{record.userUnused1,jdbcType=VARCHAR},
+      USER_UNUSED2 = #{record.userUnused2,jdbcType=VARCHAR},
+      USER_UNUSED3 = #{record.userUnused3,jdbcType=INTEGER},
+      USER_UNUSED4 = #{record.userUnused4,jdbcType=INTEGER},
+      USER_BEFORE_NINE = #{record.userBeforeNine,jdbcType=SMALLINT},
+      USER_GATHER = #{record.userGather,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fancl.db.mybatis.bean.UrUsers">
+    update ur_users
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrgId != null">
+        USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginName != null">
+        USER_LOGIN_NAME = #{userLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginPasswd != null">
+        USER_LOGIN_PASSWD = #{userLoginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginDate != null">
+        USER_LOGIN_DATE = #{userLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPhone != null">
+        USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userWorkNo != null">
+        USER_WORK_NO = #{userWorkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        USER_SEX = #{userSex,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null">
+        USER_BIRTHDAY = #{userBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userWorked != null">
+        USER_WORKED = #{userWorked,jdbcType=VARCHAR},
+      </if>
+      <if test="userEducation != null">
+        USER_EDUCATION = #{userEducation,jdbcType=CHAR},
+      </if>
+      <if test="userOrigin != null">
+        USER_ORIGIN = #{userOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="userTitle != null">
+        USER_TITLE = #{userTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="userWorkLimit != null">
+        USER_WORK_LIMIT = #{userWorkLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdentNo != null">
+        USER_IDENT_NO = #{userIdentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userInDate != null">
+        USER_IN_DATE = #{userInDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userArea != null">
+        USER_AREA = #{userArea,jdbcType=CHAR},
+      </if>
+      <if test="userAddress != null">
+        USER_ADDRESS = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPostal != null">
+        USER_POSTAL = #{userPostal,jdbcType=VARCHAR},
+      </if>
+      <if test="userActive != null">
+        USER_ACTIVE = #{userActive,jdbcType=SMALLINT},
+      </if>
+      <if test="userOut != null">
+        USER_OUT = #{userOut,jdbcType=SMALLINT},
+      </if>
+      <if test="userOutDate != null">
+        USER_OUT_DATE = #{userOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNote != null">
+        USER_NOTE = #{userNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreateId != null">
+        USER_CREATE_ID = #{userCreateId,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreateDate != null">
+        USER_CREATE_DATE = #{userCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdateId != null">
+        USER_UPDATE_ID = #{userUpdateId,jdbcType=VARCHAR},
+      </if>
+      <if test="userUpdateDate != null">
+        USER_UPDATE_DATE = #{userUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPasswdChangeDate != null">
+        USER_PASSWD_CHANGE_DATE = #{userPasswdChangeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUnlockDate != null">
+        USER_UNLOCK_DATE = #{userUnlockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAdmin != null">
+        USER_ADMIN = #{userAdmin,jdbcType=SMALLINT},
+      </if>
+      <if test="userUnused1 != null">
+        USER_UNUSED1 = #{userUnused1,jdbcType=VARCHAR},
+      </if>
+      <if test="userUnused2 != null">
+        USER_UNUSED2 = #{userUnused2,jdbcType=VARCHAR},
+      </if>
+      <if test="userUnused3 != null">
+        USER_UNUSED3 = #{userUnused3,jdbcType=INTEGER},
+      </if>
+      <if test="userUnused4 != null">
+        USER_UNUSED4 = #{userUnused4,jdbcType=INTEGER},
+      </if>
+      <if test="userBeforeNine != null">
+        USER_BEFORE_NINE = #{userBeforeNine,jdbcType=SMALLINT},
+      </if>
+      <if test="userGather != null">
+        USER_GATHER = #{userGather,jdbcType=INTEGER},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fancl.db.mybatis.bean.UrUsers">
+    update ur_users
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_ORG_ID = #{userOrgId,jdbcType=VARCHAR},
+      USER_LOGIN_NAME = #{userLoginName,jdbcType=VARCHAR},
+      USER_LOGIN_PASSWD = #{userLoginPasswd,jdbcType=VARCHAR},
+      USER_LOGIN_DATE = #{userLoginDate,jdbcType=TIMESTAMP},
+      USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      USER_WORK_NO = #{userWorkNo,jdbcType=VARCHAR},
+      USER_SEX = #{userSex,jdbcType=VARCHAR},
+      USER_BIRTHDAY = #{userBirthday,jdbcType=TIMESTAMP},
+      USER_WORKED = #{userWorked,jdbcType=VARCHAR},
+      USER_EDUCATION = #{userEducation,jdbcType=CHAR},
+      USER_ORIGIN = #{userOrigin,jdbcType=VARCHAR},
+      USER_TITLE = #{userTitle,jdbcType=VARCHAR},
+      USER_WORK_LIMIT = #{userWorkLimit,jdbcType=VARCHAR},
+      USER_IDENT_NO = #{userIdentNo,jdbcType=VARCHAR},
+      USER_IN_DATE = #{userInDate,jdbcType=TIMESTAMP},
+      USER_AREA = #{userArea,jdbcType=CHAR},
+      USER_ADDRESS = #{userAddress,jdbcType=VARCHAR},
+      USER_POSTAL = #{userPostal,jdbcType=VARCHAR},
+      USER_ACTIVE = #{userActive,jdbcType=SMALLINT},
+      USER_OUT = #{userOut,jdbcType=SMALLINT},
+      USER_OUT_DATE = #{userOutDate,jdbcType=TIMESTAMP},
+      USER_NOTE = #{userNote,jdbcType=VARCHAR},
+      USER_CREATE_ID = #{userCreateId,jdbcType=VARCHAR},
+      USER_CREATE_DATE = #{userCreateDate,jdbcType=TIMESTAMP},
+      USER_UPDATE_ID = #{userUpdateId,jdbcType=VARCHAR},
+      USER_UPDATE_DATE = #{userUpdateDate,jdbcType=TIMESTAMP},
+      USER_PASSWD_CHANGE_DATE = #{userPasswdChangeDate,jdbcType=TIMESTAMP},
+      USER_UNLOCK_DATE = #{userUnlockDate,jdbcType=TIMESTAMP},
+      USER_ADMIN = #{userAdmin,jdbcType=SMALLINT},
+      USER_UNUSED1 = #{userUnused1,jdbcType=VARCHAR},
+      USER_UNUSED2 = #{userUnused2,jdbcType=VARCHAR},
+      USER_UNUSED3 = #{userUnused3,jdbcType=INTEGER},
+      USER_UNUSED4 = #{userUnused4,jdbcType=INTEGER},
+      USER_BEFORE_NINE = #{userBeforeNine,jdbcType=SMALLINT},
+      USER_GATHER = #{userGather,jdbcType=INTEGER}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

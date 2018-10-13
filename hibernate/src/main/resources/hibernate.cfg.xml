@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--数据源信息 for Druid-->
+        <property name="hibernate.connection.provider_class">com.alibaba.druid.support.hibernate.DruidConnectionProvider</property>
+        <property name="driverClassName">com.mysql.jdbc.Driver</property>
+        <property name="url">jdbc:mysql://localhost:3306/user</property>
+        <property name="username">root</property>
+        <property name="password">123456</property>
+        <property name="filter">stat,log4j</property>
+        <property name="initialSize">5</property>
+        <property name="maxActive">100</property>
+        <property name="maxWait">60000</property>
+        <property name="timeBetweenEvictionRunsMillis">60000</property>
+        <property name="minEvictableIdleTimeMillis">300000</property>
+        <property name="validationQuery">SELECT 1</property>
+        <property name="testWhileIdle">true</property>
+        <property name="testOnBorrow">false</property>
+        <property name="testOnReturn">false</property>
+        <property name="poolPreparedStatements">false</property>
+        <property name="maxPoolPreparedStatementPerConnectionSize">200</property>
+        <property name="slowSqlMillis">10000</property>
+        <property name="logSlowSql">true</property>
+        <!-- 可以将向数据库发送的SQL语句显示出来 -->
+        <property name="hibernate.show_sql">true</property>
+        <!-- 格式化SQL语句 -->
+        <property name="hibernate.format_sql">true</property>
+        <!-- hibernate的方言 -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!-- 配置hibernate的映射文件所在的位置 -->
+        <mapping class="com.fancl.db.hibernate.entity.User" />
+    </session-factory>
+</hibernate-configuration>

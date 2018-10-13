@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fancl.db.mybatis.dao.SysSubFuncDao">
+  <resultMap id="BaseResultMap" type="com.fancl.db.mybatis.bean.SysSubFunc">
+    <id column="SF_ID" jdbcType="INTEGER" property="sfId" />
+    <result column="SF_FN_ID" jdbcType="INTEGER" property="sfFnId" />
+    <result column="SF_NAME" jdbcType="VARCHAR" property="sfName" />
+    <result column="SF_NAME_ID" jdbcType="VARCHAR" property="sfNameId" />
+    <result column="SF_POSITION" jdbcType="VARCHAR" property="sfPosition" />
+    <result column="SF_ICON" jdbcType="VARCHAR" property="sfIcon" />
+    <result column="SF_USE_KEY" jdbcType="SMALLINT" property="sfUseKey" />
+    <result column="SF_CONTENT" jdbcType="VARCHAR" property="sfContent" />
+    <result column="SF_USE_MARCO" jdbcType="SMALLINT" property="sfUseMarco" />
+    <result column="SF_CONFIRM_DATA" jdbcType="VARCHAR" property="sfConfirmData" />
+    <result column="SF_DIALOG_TITLE" jdbcType="VARCHAR" property="sfDialogTitle" />
+    <result column="SF_INFO" jdbcType="VARCHAR" property="sfInfo" />
+    <result column="SF_ORDER" jdbcType="INTEGER" property="sfOrder" />
+    <result column="SF_PAGE" jdbcType="VARCHAR" property="sfPage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <if test="fields == null">
+      SF_ID, SF_FN_ID, SF_NAME, SF_NAME_ID, SF_POSITION, SF_ICON, SF_USE_KEY, SF_CONTENT, 
+      SF_USE_MARCO, SF_CONFIRM_DATA, SF_DIALOG_TITLE, SF_INFO, SF_ORDER, SF_PAGE
+    </if>
+    <if test="fields != null">
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByCriteria" parameterType="com.fancl.db.mybatis.bean.SysSubFuncCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_sub_func
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null">
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    SF_ID,SF_FN_ID,SF_NAME,SF_NAME_ID,SF_POSITION,SF_ICON,SF_USE_KEY,SF_CONTENT,SF_USE_MARCO,SF_CONFIRM_DATA,SF_DIALOG_TITLE,SF_INFO,SF_ORDER,SF_PAGE
+    from sys_sub_func
+    where SF_ID = #{sfId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_sub_func
+    where SF_ID = #{sfId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.fancl.db.mybatis.bean.SysSubFuncCriteria">
+    delete from sys_sub_func
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fancl.db.mybatis.bean.SysSubFunc">
+    insert into sys_sub_func (SF_ID, SF_FN_ID, SF_NAME, 
+      SF_NAME_ID, SF_POSITION, SF_ICON, 
+      SF_USE_KEY, SF_CONTENT, SF_USE_MARCO, 
+      SF_CONFIRM_DATA, SF_DIALOG_TITLE, SF_INFO, 
+      SF_ORDER, SF_PAGE)
+    values (#{sfId,jdbcType=INTEGER}, #{sfFnId,jdbcType=INTEGER}, #{sfName,jdbcType=VARCHAR}, 
+      #{sfNameId,jdbcType=VARCHAR}, #{sfPosition,jdbcType=VARCHAR}, #{sfIcon,jdbcType=VARCHAR}, 
+      #{sfUseKey,jdbcType=SMALLINT}, #{sfContent,jdbcType=VARCHAR}, #{sfUseMarco,jdbcType=SMALLINT}, 
+      #{sfConfirmData,jdbcType=VARCHAR}, #{sfDialogTitle,jdbcType=VARCHAR}, #{sfInfo,jdbcType=VARCHAR}, 
+      #{sfOrder,jdbcType=INTEGER}, #{sfPage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fancl.db.mybatis.bean.SysSubFunc">
+    insert into sys_sub_func
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sfId != null">
+        SF_ID,
+      </if>
+      <if test="sfFnId != null">
+        SF_FN_ID,
+      </if>
+      <if test="sfName != null">
+        SF_NAME,
+      </if>
+      <if test="sfNameId != null">
+        SF_NAME_ID,
+      </if>
+      <if test="sfPosition != null">
+        SF_POSITION,
+      </if>
+      <if test="sfIcon != null">
+        SF_ICON,
+      </if>
+      <if test="sfUseKey != null">
+        SF_USE_KEY,
+      </if>
+      <if test="sfContent != null">
+        SF_CONTENT,
+      </if>
+      <if test="sfUseMarco != null">
+        SF_USE_MARCO,
+      </if>
+      <if test="sfConfirmData != null">
+        SF_CONFIRM_DATA,
+      </if>
+      <if test="sfDialogTitle != null">
+        SF_DIALOG_TITLE,
+      </if>
+      <if test="sfInfo != null">
+        SF_INFO,
+      </if>
+      <if test="sfOrder != null">
+        SF_ORDER,
+      </if>
+      <if test="sfPage != null">
+        SF_PAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sfId != null">
+        #{sfId,jdbcType=INTEGER},
+      </if>
+      <if test="sfFnId != null">
+        #{sfFnId,jdbcType=INTEGER},
+      </if>
+      <if test="sfName != null">
+        #{sfName,jdbcType=VARCHAR},
+      </if>
+      <if test="sfNameId != null">
+        #{sfNameId,jdbcType=VARCHAR},
+      </if>
+      <if test="sfPosition != null">
+        #{sfPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="sfIcon != null">
+        #{sfIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sfUseKey != null">
+        #{sfUseKey,jdbcType=SMALLINT},
+      </if>
+      <if test="sfContent != null">
+        #{sfContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sfUseMarco != null">
+        #{sfUseMarco,jdbcType=SMALLINT},
+      </if>
+      <if test="sfConfirmData != null">
+        #{sfConfirmData,jdbcType=VARCHAR},
+      </if>
+      <if test="sfDialogTitle != null">
+        #{sfDialogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sfInfo != null">
+        #{sfInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sfOrder != null">
+        #{sfOrder,jdbcType=INTEGER},
+      </if>
+      <if test="sfPage != null">
+        #{sfPage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.fancl.db.mybatis.bean.SysSubFuncCriteria" resultType="java.lang.Long">
+    select count(*) from sys_sub_func
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update sys_sub_func
+    <set>
+      <if test="record.sfId != null">
+        SF_ID = #{record.sfId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sfFnId != null">
+        SF_FN_ID = #{record.sfFnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sfName != null">
+        SF_NAME = #{record.sfName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfNameId != null">
+        SF_NAME_ID = #{record.sfNameId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfPosition != null">
+        SF_POSITION = #{record.sfPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfIcon != null">
+        SF_ICON = #{record.sfIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfUseKey != null">
+        SF_USE_KEY = #{record.sfUseKey,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sfContent != null">
+        SF_CONTENT = #{record.sfContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfUseMarco != null">
+        SF_USE_MARCO = #{record.sfUseMarco,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sfConfirmData != null">
+        SF_CONFIRM_DATA = #{record.sfConfirmData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfDialogTitle != null">
+        SF_DIALOG_TITLE = #{record.sfDialogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfInfo != null">
+        SF_INFO = #{record.sfInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sfOrder != null">
+        SF_ORDER = #{record.sfOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.sfPage != null">
+        SF_PAGE = #{record.sfPage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update sys_sub_func
+    set SF_ID = #{record.sfId,jdbcType=INTEGER},
+      SF_FN_ID = #{record.sfFnId,jdbcType=INTEGER},
+      SF_NAME = #{record.sfName,jdbcType=VARCHAR},
+      SF_NAME_ID = #{record.sfNameId,jdbcType=VARCHAR},
+      SF_POSITION = #{record.sfPosition,jdbcType=VARCHAR},
+      SF_ICON = #{record.sfIcon,jdbcType=VARCHAR},
+      SF_USE_KEY = #{record.sfUseKey,jdbcType=SMALLINT},
+      SF_CONTENT = #{record.sfContent,jdbcType=VARCHAR},
+      SF_USE_MARCO = #{record.sfUseMarco,jdbcType=SMALLINT},
+      SF_CONFIRM_DATA = #{record.sfConfirmData,jdbcType=VARCHAR},
+      SF_DIALOG_TITLE = #{record.sfDialogTitle,jdbcType=VARCHAR},
+      SF_INFO = #{record.sfInfo,jdbcType=VARCHAR},
+      SF_ORDER = #{record.sfOrder,jdbcType=INTEGER},
+      SF_PAGE = #{record.sfPage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fancl.db.mybatis.bean.SysSubFunc">
+    update sys_sub_func
+    <set>
+      <if test="sfFnId != null">
+        SF_FN_ID = #{sfFnId,jdbcType=INTEGER},
+      </if>
+      <if test="sfName != null">
+        SF_NAME = #{sfName,jdbcType=VARCHAR},
+      </if>
+      <if test="sfNameId != null">
+        SF_NAME_ID = #{sfNameId,jdbcType=VARCHAR},
+      </if>
+      <if test="sfPosition != null">
+        SF_POSITION = #{sfPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="sfIcon != null">
+        SF_ICON = #{sfIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sfUseKey != null">
+        SF_USE_KEY = #{sfUseKey,jdbcType=SMALLINT},
+      </if>
+      <if test="sfContent != null">
+        SF_CONTENT = #{sfContent,jdbcType=VARCHAR},
+      </if>
+      <if test="sfUseMarco != null">
+        SF_USE_MARCO = #{sfUseMarco,jdbcType=SMALLINT},
+      </if>
+      <if test="sfConfirmData != null">
+        SF_CONFIRM_DATA = #{sfConfirmData,jdbcType=VARCHAR},
+      </if>
+      <if test="sfDialogTitle != null">
+        SF_DIALOG_TITLE = #{sfDialogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="sfInfo != null">
+        SF_INFO = #{sfInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="sfOrder != null">
+        SF_ORDER = #{sfOrder,jdbcType=INTEGER},
+      </if>
+      <if test="sfPage != null">
+        SF_PAGE = #{sfPage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SF_ID = #{sfId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fancl.db.mybatis.bean.SysSubFunc">
+    update sys_sub_func
+    set SF_FN_ID = #{sfFnId,jdbcType=INTEGER},
+      SF_NAME = #{sfName,jdbcType=VARCHAR},
+      SF_NAME_ID = #{sfNameId,jdbcType=VARCHAR},
+      SF_POSITION = #{sfPosition,jdbcType=VARCHAR},
+      SF_ICON = #{sfIcon,jdbcType=VARCHAR},
+      SF_USE_KEY = #{sfUseKey,jdbcType=SMALLINT},
+      SF_CONTENT = #{sfContent,jdbcType=VARCHAR},
+      SF_USE_MARCO = #{sfUseMarco,jdbcType=SMALLINT},
+      SF_CONFIRM_DATA = #{sfConfirmData,jdbcType=VARCHAR},
+      SF_DIALOG_TITLE = #{sfDialogTitle,jdbcType=VARCHAR},
+      SF_INFO = #{sfInfo,jdbcType=VARCHAR},
+      SF_ORDER = #{sfOrder,jdbcType=INTEGER},
+      SF_PAGE = #{sfPage,jdbcType=VARCHAR}
+    where SF_ID = #{sfId,jdbcType=INTEGER}
+  </update>
+</mapper>

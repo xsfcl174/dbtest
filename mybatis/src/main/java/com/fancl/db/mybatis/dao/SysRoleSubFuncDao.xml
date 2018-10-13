@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fancl.db.mybatis.dao.SysRoleSubFuncDao">
+  <resultMap id="BaseResultMap" type="com.fancl.db.mybatis.bean.SysRoleSubFunc">
+    <id column="PSF_ROLE_ID" jdbcType="INTEGER" property="psfRoleId" />
+    <id column="PSF_SF_ID" jdbcType="INTEGER" property="psfSfId" />
+    <result column="PSF_IS_FUNC" jdbcType="SMALLINT" property="psfIsFunc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <if test="fields == null">
+      PSF_ROLE_ID, PSF_SF_ID, PSF_IS_FUNC
+    </if>
+    <if test="fields != null">
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByCriteria" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFuncCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_role_sub_func
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null">
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFuncKey" resultMap="BaseResultMap">
+    select 
+    PSF_ROLE_ID,PSF_SF_ID,PSF_IS_FUNC
+    from sys_role_sub_func
+    where PSF_ROLE_ID = #{psfRoleId,jdbcType=INTEGER}
+      and PSF_SF_ID = #{psfSfId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFuncKey">
+    delete from sys_role_sub_func
+    where PSF_ROLE_ID = #{psfRoleId,jdbcType=INTEGER}
+      and PSF_SF_ID = #{psfSfId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFuncCriteria">
+    delete from sys_role_sub_func
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFunc">
+    insert into sys_role_sub_func (PSF_ROLE_ID, PSF_SF_ID, PSF_IS_FUNC
+      )
+    values (#{psfRoleId,jdbcType=INTEGER}, #{psfSfId,jdbcType=INTEGER}, #{psfIsFunc,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFunc">
+    insert into sys_role_sub_func
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="psfRoleId != null">
+        PSF_ROLE_ID,
+      </if>
+      <if test="psfSfId != null">
+        PSF_SF_ID,
+      </if>
+      <if test="psfIsFunc != null">
+        PSF_IS_FUNC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="psfRoleId != null">
+        #{psfRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="psfSfId != null">
+        #{psfSfId,jdbcType=INTEGER},
+      </if>
+      <if test="psfIsFunc != null">
+        #{psfIsFunc,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFuncCriteria" resultType="java.lang.Long">
+    select count(*) from sys_role_sub_func
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update sys_role_sub_func
+    <set>
+      <if test="record.psfRoleId != null">
+        PSF_ROLE_ID = #{record.psfRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.psfSfId != null">
+        PSF_SF_ID = #{record.psfSfId,jdbcType=INTEGER},
+      </if>
+      <if test="record.psfIsFunc != null">
+        PSF_IS_FUNC = #{record.psfIsFunc,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update sys_role_sub_func
+    set PSF_ROLE_ID = #{record.psfRoleId,jdbcType=INTEGER},
+      PSF_SF_ID = #{record.psfSfId,jdbcType=INTEGER},
+      PSF_IS_FUNC = #{record.psfIsFunc,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFunc">
+    update sys_role_sub_func
+    <set>
+      <if test="psfIsFunc != null">
+        PSF_IS_FUNC = #{psfIsFunc,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where PSF_ROLE_ID = #{psfRoleId,jdbcType=INTEGER}
+      and PSF_SF_ID = #{psfSfId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fancl.db.mybatis.bean.SysRoleSubFunc">
+    update sys_role_sub_func
+    set PSF_IS_FUNC = #{psfIsFunc,jdbcType=SMALLINT}
+    where PSF_ROLE_ID = #{psfRoleId,jdbcType=INTEGER}
+      and PSF_SF_ID = #{psfSfId,jdbcType=INTEGER}
+  </update>
+</mapper>
